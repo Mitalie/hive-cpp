@@ -22,7 +22,7 @@ Contact::Contact(
 {
 }
 
-static void print_shorten(const std::string &field, size_t max_len)
+static void print_shorten(const std::string &field, unsigned int max_len)
 {
 	if (field.length() > max_len)
 		std::cout << field.substr(0, max_len - 1) << '.';
@@ -30,20 +30,23 @@ static void print_shorten(const std::string &field, size_t max_len)
 		std::cout << std::setw(max_len) << field;
 }
 
-void Contact::print_short(unsigned int index)
+void Contact::print_in_list(unsigned int index)
 {
-	const size_t field_len = 10;
+	const unsigned int field_len = 10;
 	std::cout << std::setw(field_len) << index << '|';
 	print_shorten(first_name, field_len);
+	std::cout << '|';
 	print_shorten(last_name, field_len);
+	std::cout << '|';
 	print_shorten(nickname, field_len);
+	std::cout << '\n';
 }
 
-void Contact::print_full()
+void Contact::print()
 {
-	std::cout << "First name     :" << first_name << std::endl;
-	std::cout << "Last name      :" << last_name << std::endl;
-	std::cout << "Nickname       :" << nickname << std::endl;
-	std::cout << "Phone number   :" << phone_number << std::endl;
-	std::cout << "Darkest secret :" << darkest_secret << std::endl;
+	std::cout << "First name     : " << first_name << '\n';
+	std::cout << "Last name      : " << last_name << '\n';
+	std::cout << "Nickname       : " << nickname << '\n';
+	std::cout << "Phone number   : " << phone_number << '\n';
+	std::cout << "Darkest secret : " << darkest_secret << '\n';
 }

@@ -20,6 +20,6 @@ public:
 		const std::string &phone_number,
 		const std::string &darkest_secret);
 
-	void print_short(unsigned int index);
-	void print_full();
+	void print_in_list(unsigned int index);
+	void print();
 };
