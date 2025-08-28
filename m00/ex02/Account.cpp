@@ -120,7 +120,7 @@ void Account::_displayTimestamp(void)
 	char prev_fill = std::cout.fill('0');
 	std::cout << '[';
 	std::cout << std::setw(4) << 1900 + tm->tm_year;
-	std::cout << std::setw(2) << tm->tm_mon;
+	std::cout << std::setw(2) << 1 + tm->tm_mon;
 	std::cout << std::setw(2) << tm->tm_mday;
 	std::cout << '_';
 	std::cout << std::setw(2) << tm->tm_hour;
