@@ -1,0 +1,36 @@
+#!/bin/sh
+
+force=
+
+if test $# -ge 1 && test "$1" = -f; then
+	force=y
+	shift
+fi
+
+if test $# -ne 1; then
+	echo >&2 "Usage: $0 [-f] <MODULE>"
+	echo >&2 "    -f        Delete existing module branch first"
+	echo >&2 "    <MODULE>  Directory and branch name to use"
+	exit 1
+fi
+
+module=$1
+
+if test ! -d "${module}"; then
+	echo >&2 "$0: ${module}: not a valid module"
+	exit 1
+fi
+
+if git show-ref --verify --quiet "refs/heads/${module}" && test "${force}"; then
+	if ! git branch -D "${module}"; then
+		echo >&2 "$0: ${module}: deleting existing branch failed"
+		exit 2
+	fi
+fi
+
+if ! git subtree split --prefix "${module}" --branch "${module}"; then
+	echo >&2 "$0: ${module}: git subtree split failed"
+	echo >&2 "    If the error was about branch not being an ancestor of a commit,"
+	echo >&2 "    try again with the -f flag."
+	exit 2
+fi
