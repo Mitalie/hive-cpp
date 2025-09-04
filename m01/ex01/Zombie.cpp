@@ -3,6 +3,11 @@
 #include <iostream>
 #include <string>
 
+Zombie::Zombie()
+{
+	std::cerr << "[debug] Constructing zombie with default constructor" << std::endl;
+}
+
 Zombie::Zombie(const std::string &name)
 	: name(name)
 {
