@@ -2,6 +2,7 @@ NAME := replace
 
 SRCS := \
 	main.cpp \
+	stream_replace.cpp \
 
 CXX := c++
 CPPFLAGS := -MMD -MP
