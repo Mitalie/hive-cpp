@@ -38,7 +38,16 @@ static bool file_replace(
 
 int main(int argc, char **argv)
 {
-	(void)argc;
-	(void)argv;
-	return 1;
+	if (argc != 4)
+	{
+		std::cerr << "Usage: replace <infile> <to_replace> <replacement>\n";
+		return 2;
+	}
+	std::string infile(argv[1]);
+	std::string outfile = infile + ".replace";
+	std::string to_match(argv[2]);
+	std::string replacement(argv[3]);
+	if (!file_replace(infile, outfile, to_match, replacement))
+		return 1;
+	return 0;
 }
