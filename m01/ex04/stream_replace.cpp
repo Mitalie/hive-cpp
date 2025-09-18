@@ -1,18 +1,9 @@
 #include "stream_replace.hpp"
 
+#include <cstddef>
 #include <istream>
 #include <ostream>
 #include <string>
-
-static void put_string_it(
-	std::ostream &output,
-	const std::string::const_iterator begin,
-	const std::string::const_iterator end)
-{
-	std::string::const_iterator it = begin;
-	while (it != end)
-		output.put(*it++);
-}
 
 void stream_replace(
 	std::istream &input,
@@ -25,24 +16,24 @@ void stream_replace(
 		output << input.rdbuf();
 		return;
 	}
-	std::string::const_iterator match_pos = to_match.begin();
+	std::size_t match_pos = 0;
 	char input_char;
 	while (input.get(input_char) && output)
 	{
-		if (input_char == *match_pos)
+		if (input_char == to_match[match_pos])
 		{
 			++match_pos;
-			if (match_pos == to_match.end())
+			if (match_pos == to_match.length())
 			{
-				put_string_it(output, replacement.begin(), replacement.end());
-				match_pos = to_match.begin();
+				output.write(replacement.data(), replacement.length());
+				match_pos = 0;
 			}
 		}
 		else
 		{
-			put_string_it(output, to_match.begin(), match_pos);
+			output.write(to_match.data(), match_pos);
 			output.put(input_char);
-			match_pos = to_match.begin();
+			match_pos = 0;
 		}
 	}
 }
