@@ -1,3 +1,4 @@
+#include <exception>
 #include <iostream>
 
 #include "Zombie.hpp"
@@ -29,7 +30,7 @@ void testZombieUtils()
 	delete bar;
 }
 
-int main()
+void brainzTest_main()
 {
 	std::cout << "==== Start testing Zombie class ====" << std::endl;
 	testZombie();
@@ -37,4 +38,22 @@ int main()
 	std::cout << "==== Start testing Zombie utils ====" << std::endl;
 	testZombieUtils();
 	std::cout << "==== Finish testing Zombie utils ====" << std::endl;
+}
+
+int main()
+{
+	try
+	{
+		brainzTest_main();
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
+	}
 }

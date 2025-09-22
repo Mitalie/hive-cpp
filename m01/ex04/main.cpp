@@ -1,3 +1,4 @@
+#include <exception>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -36,7 +37,7 @@ static bool file_replace(
 	return true;
 }
 
-int main(int argc, char **argv)
+int replace_main(int argc, char **argv)
 {
 	if (argc != 4)
 	{
@@ -50,4 +51,22 @@ int main(int argc, char **argv)
 	if (!file_replace(infile, outfile, to_match, replacement))
 		return 1;
 	return 0;
+}
+
+int main(int argc, char **argv)
+{
+	try
+	{
+		return replace_main(argc, argv);
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
+	}
 }

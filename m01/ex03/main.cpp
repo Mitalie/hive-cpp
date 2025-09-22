@@ -1,8 +1,11 @@
+#include <exception>
+#include <iostream>
+
 #include "HumanA.hpp"
 #include "HumanB.hpp"
 #include "Weapon.hpp"
 
-int main()
+void violence_main()
 {
 	{
 		Weapon club = Weapon("crude spiked club");
@@ -22,5 +25,22 @@ int main()
 		club.setType("some other type of club");
 		jim.attack();
 	}
-	return 0;
+}
+
+int main()
+{
+	try
+	{
+		violence_main();
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
+	}
 }

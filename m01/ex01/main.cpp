@@ -1,9 +1,10 @@
+#include <exception>
 #include <iostream>
 
 #include "Zombie.hpp"
 #include "zombieHorde.hpp"
 
-int main()
+void brainzTest_main()
 {
 	const int N = 5;
 
@@ -15,4 +16,22 @@ int main()
 	std::cout << "==== Deleting zombie horde ====" << std::endl;
 	delete[] horde;
 	std::cout << "==== Done ====" << std::endl;
+}
+
+int main()
+{
+	try
+	{
+		brainzTest_main();
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
+	}
 }

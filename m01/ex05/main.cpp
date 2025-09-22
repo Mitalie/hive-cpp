@@ -1,8 +1,9 @@
+#include <exception>
 #include <iostream>
 
 #include "Harl.hpp"
 
-int main()
+void harl_main()
 {
 	Harl harl;
 
@@ -19,4 +20,22 @@ int main()
 	harl.complain("WARNING");
 
 	std::cout << "==== Done ====" << std::endl;
+}
+
+int main()
+{
+	try
+	{
+		harl_main();
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
+	}
 }

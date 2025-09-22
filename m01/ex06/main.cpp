@@ -1,4 +1,5 @@
 #include <cstddef>
+#include <exception>
 #include <iostream>
 #include <string>
 
@@ -64,7 +65,7 @@ void harlFilter(Harl &harl, HarlLevel level)
 	}
 }
 
-int main(int argc, char **argv)
+int harlFilter_main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
@@ -74,4 +75,22 @@ int main(int argc, char **argv)
 	Harl harl;
 	harlFilter(harl, strToLevel(argv[1]));
 	return 0;
+}
+
+int main(int argc, char **argv)
+{
+	try
+	{
+		return harlFilter_main(argc, argv);
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
+	}
 }
