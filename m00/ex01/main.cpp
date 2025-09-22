@@ -1,3 +1,4 @@
+#include <exception>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -58,7 +59,7 @@ static void handle_search(PhoneBook &phonebook)
 		std::cout << "Invalid index\n";
 }
 
-int main()
+void phonebook_main()
 {
 	PhoneBook phonebook;
 
@@ -72,8 +73,26 @@ int main()
 		else if (command == "SEARCH")
 			handle_search(phonebook);
 		else if (command == "EXIT")
-			return 0;
+			return;
 		else
 			std::cout << "Unrecognized command\n";
+	}
+}
+
+int main()
+{
+	try
+	{
+		phonebook_main();
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
 	}
 }
