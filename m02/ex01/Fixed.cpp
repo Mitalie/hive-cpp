@@ -53,9 +53,11 @@ void Fixed::setRawBits(int const raw)
 
 int Fixed::toInt() const
 {
-	int const scale = 1 << numFracBits;
-	int const half = 1 << (numFracBits - 1);
-	return (bits + half) / scale;
+	// Can't just increment by half and round down - the addition could overflow
+	int const whole = bits >> numFracBits;
+	int const halfBit = 1 << (numFracBits - 1);
+	bool const fracIsHalfOrGreater = bits & halfBit;
+	return whole + fracIsHalfOrGreater;
 }
 
 float Fixed::toFloat() const
