@@ -55,6 +55,51 @@ void test2()
 	std::cout << "b >= a : " << (b >= a) << "\n";
 	std::cout << "b == a : " << (b == a) << "\n";
 	std::cout << "b != a : " << (b != a) << "\n\n";
+
+	{
+		Fixed const &res = (Fixed::min(a, b));
+		std::cout << "Fixed::min(a, b) : reference to "
+				  << (&res == &a ? "a" : (&res == &b ? "b" : "<unknown>")) << "\n";
+	}
+	{
+		Fixed const &res = (Fixed::min(b, a));
+		std::cout << "Fixed::min(b, a) : reference to "
+				  << (&res == &a ? "a" : (&res == &b ? "b" : "<unknown>")) << "\n";
+	}
+	{
+		Fixed const &res = (Fixed::max(a, b));
+		std::cout << "Fixed::max(a, b) : reference to "
+				  << (&res == &a ? "a" : (&res == &b ? "b" : "<unknown>")) << "\n";
+	}
+	{
+		Fixed const &res = (Fixed::max(b, a));
+		std::cout << "Fixed::max(b, a) : reference to "
+				  << (&res == &a ? "a" : (&res == &b ? "b" : "<unknown>")) << "\n\n";
+	}
+
+	std::cout << "    --b : " << --b << "\n\n";
+	std::cout << "a = " << a << " ; b = " << b << "\n\n";
+
+	{
+		Fixed const &res = (Fixed::min(a, b));
+		std::cout << "Fixed::min(a, b) : reference to "
+				  << (&res == &a ? "a" : (&res == &b ? "b" : "<unknown>")) << "\n";
+	}
+	{
+		Fixed const &res = (Fixed::min(b, a));
+		std::cout << "Fixed::min(b, a) : reference to "
+				  << (&res == &a ? "a" : (&res == &b ? "b" : "<unknown>")) << "\n";
+	}
+	{
+		Fixed const &res = (Fixed::max(a, b));
+		std::cout << "Fixed::max(a, b) : reference to "
+				  << (&res == &a ? "a" : (&res == &b ? "b" : "<unknown>")) << "\n";
+	}
+	{
+		Fixed const &res = (Fixed::max(b, a));
+		std::cout << "Fixed::max(b, a) : reference to "
+				  << (&res == &a ? "a" : (&res == &b ? "b" : "<unknown>")) << "\n\n";
+	}
 }
 
 int main()
