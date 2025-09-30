@@ -21,3 +21,5 @@ private:
 	than to make it a no-op or to break the constness promise with const_cast. */
 	Point &operator=(Point const &other);
 };
+
+std::ostream &operator<<(std::ostream &os, Point const &fixed);
