@@ -1,3 +1,4 @@
+#include <exception>
 #include <iostream>
 
 #include "bsp.hpp"
@@ -9,7 +10,7 @@ static void print_bsp(Point const a, Point const b, Point const c, Point const p
 	std::cout << "Point " << point << " is " << side << " the triangle.\n";
 }
 
-int main()
+void bspTest_main()
 {
 	Point a(5, 0);
 	Point b(3, 2);
@@ -34,4 +35,22 @@ int main()
 	print_bsp(a, b, c, Point(3, -3));
 	print_bsp(a, b, c, Point(2.32f, 0));
 	print_bsp(a, b, c, Point(5, 0.02f));
+}
+
+int main()
+{
+	try
+	{
+		bspTest_main();
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
+	}
 }

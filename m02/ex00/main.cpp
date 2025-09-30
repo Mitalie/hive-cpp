@@ -1,8 +1,9 @@
+#include <exception>
 #include <iostream>
 
 #include "Fixed.hpp"
 
-int main(void)
+void bspTest_main()
 {
 	Fixed a;
 	Fixed b(a);
@@ -13,6 +14,22 @@ int main(void)
 	std::cout << a.getRawBits() << std::endl;
 	std::cout << b.getRawBits() << std::endl;
 	std::cout << c.getRawBits() << std::endl;
+}
 
-	return 0;
+int main()
+{
+	try
+	{
+		bspTest_main();
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
+	}
 }

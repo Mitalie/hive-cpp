@@ -1,3 +1,4 @@
+#include <exception>
 #include <iostream>
 
 #include "Fixed.hpp"
@@ -102,11 +103,29 @@ void test2()
 	}
 }
 
-int main()
+void bspTest_main()
 {
 	std::cout << "==== Run tests from assignment ====\n\n";
 	test1();
 	std::cout << "\n==== Run additional tests ====\n\n";
 	test2();
 	std::cout << "\n==== Done ====" << std::endl;
+}
+
+int main()
+{
+	try
+	{
+		bspTest_main();
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
+	}
 }
