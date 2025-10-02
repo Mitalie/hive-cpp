@@ -1,8 +1,9 @@
-NAME := clap
+NAME := scav
 
 SRCS := \
 	main.cpp \
 	ClapTrap.cpp \
+	ScavTrap.cpp \
 
 CXX := c++
 CPPFLAGS := -MMD -MP
