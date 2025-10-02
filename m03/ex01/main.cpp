@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 static const char BY[] = "\x1b[93m";  // Bright yellow
 static const char DY[] = "\x1b[33m";  // Dim yellow
@@ -108,10 +109,70 @@ void test4()
 	std::cout << BY << "==== Test4 done ====" << RN;
 }
 
+void test5()
+{
+	std::cout << BY << "==== Test5: ScavTrap, sub-type of ClapTrap with inherited members ====" << RN;
+	{
+		std::cout << DY << "[Test5] constructing local ScavTrap \"scav\"" << RN;
+		ScavTrap scav("Scavvy");
+		std::cout << DY << "[Test5] testing ScavTrap functions" << RN;
+		scav.attack("a bandit");
+		scav.guardGate();
+		std::cout << DY << "[Test5] testing inherited functions" << RN;
+		scav.takeDamage(4);
+		scav.beRepaired(3);
+		std::cout << DY << "[Test5] exiting scope" << RN;
+	}
+	std::cout << BY << "==== Test5 done ====" << RN;
+}
+
+void test6()
+{
+	std::cout << BY << "==== Test6: ScavTrap copy construction and assignment ====" << RN;
+	{
+		std::cout << DY << "[Test6] constructing local \"one\"" << RN;
+		ScavTrap one("Scavvy");
+		std::cout << DY << "[Test6] \"one\" acts" << RN;
+		one.attack("a bandit");
+		one.takeDamage(4);
+		one.beRepaired(3);
+		one.guardGate();
+
+		std::cout << DY << "[Test6] constructing local \"two\" as copy of \"one\"" << RN;
+		ScavTrap two(one);
+		std::cout << DY << "[Test6] \"two\" acts" << RN;
+		two.attack("a stalker");
+		two.takeDamage(6);
+		two.beRepaired(2);
+		two.guardGate();
+
+		std::cout << DY << "[Test6] constructing local \"three\"" << RN;
+		ScavTrap three;
+		std::cout << DY << "[Test6] \"three\" acts" << RN;
+		three.attack("a loader");
+		three.takeDamage(2);
+		three.beRepaired(1);
+		three.guardGate();
+
+		std::cout << DY << "[Test6] assigning \"two\" over \"three\"" << RN;
+		three = two;
+		std::cout << DY << "[Test6] \"three\" acts" << RN;
+		three.attack("an eridian");
+		three.takeDamage(2);
+		three.beRepaired(1);
+		three.guardGate();
+
+		std::cout << DY << "[Test6] exiting scope" << RN;
+	}
+	std::cout << BY << "==== Test6 done ====" << RN;
+}
+
 int main()
 {
 	test1();
 	test2();
 	test3();
 	test4();
+	test5();
+	test6();
 }
