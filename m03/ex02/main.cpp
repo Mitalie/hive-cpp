@@ -2,6 +2,7 @@
 
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 static const char BY[] = "\x1b[93m";  // Bright yellow
 static const char DY[] = "\x1b[33m";  // Dim yellow
@@ -167,6 +168,64 @@ void test6()
 	std::cout << BY << "==== Test6 done ====" << RN;
 }
 
+void test7()
+{
+	std::cout << BY << "==== Test7: FragTrap, sub-type with inherited members ====" << RN;
+	{
+		std::cout << DY << "[Test7] constructing local FragTrap \"frag\"" << RN;
+		FragTrap frag("Fraggy");
+		std::cout << DY << "[Test7] testing FragTrap functions" << RN;
+		frag.highFivesGuys();
+		std::cout << DY << "[Test7] testing inherited functions" << RN;
+		frag.attack("a bandit");
+		frag.takeDamage(4);
+		frag.beRepaired(3);
+		std::cout << DY << "[Test7] exiting scope" << RN;
+	}
+	std::cout << BY << "==== Test7 done ====" << RN;
+}
+
+void test8()
+{
+	std::cout << BY << "==== Test8: FragTrap copy construction and assignment ====" << RN;
+	{
+		std::cout << DY << "[Test8] constructing local \"one\"" << RN;
+		FragTrap one("Fraggy");
+		std::cout << DY << "[Test8] \"one\" acts" << RN;
+		one.attack("a bandit");
+		one.takeDamage(4);
+		one.beRepaired(3);
+		one.highFivesGuys();
+
+		std::cout << DY << "[Test8] constructing local \"two\" as copy of \"one\"" << RN;
+		FragTrap two(one);
+		std::cout << DY << "[Test8] \"two\" acts" << RN;
+		two.attack("a stalker");
+		two.takeDamage(6);
+		two.beRepaired(2);
+		two.highFivesGuys();
+
+		std::cout << DY << "[Test8] constructing local \"three\"" << RN;
+		FragTrap three;
+		std::cout << DY << "[Test8] \"three\" acts" << RN;
+		three.attack("a loader");
+		three.takeDamage(2);
+		three.beRepaired(1);
+		three.highFivesGuys();
+
+		std::cout << DY << "[Test8] assigning \"two\" over \"three\"" << RN;
+		three = two;
+		std::cout << DY << "[Test8] \"three\" acts" << RN;
+		three.attack("an eridian");
+		three.takeDamage(2);
+		three.beRepaired(1);
+		three.highFivesGuys();
+
+		std::cout << DY << "[Test8] exiting scope" << RN;
+	}
+	std::cout << BY << "==== Test8 done ====" << RN;
+}
+
 int main()
 {
 	test1();
@@ -175,4 +234,6 @@ int main()
 	test4();
 	test5();
 	test6();
+	test7();
+	test8();
 }
