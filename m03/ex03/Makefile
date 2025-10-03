@@ -5,6 +5,7 @@ SRCS := \
 	ClapTrap.cpp \
 	ScavTrap.cpp \
 	FragTrap.cpp \
+	DiamondTrap.cpp \
 
 CXX := c++
 CPPFLAGS := -MMD -MP
