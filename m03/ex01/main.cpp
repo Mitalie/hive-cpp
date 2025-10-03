@@ -27,7 +27,49 @@ void test1()
 	std::cout << "==== Test1 done ====\n";
 }
 
+void test2()
+{
+	std::cout << "==== Test2: copy construction and assignment ====\n";
+	{
+		std::cout << "[Test2] constructing local \"one\"\n";
+		ScavTrap one("Scavvy");
+		std::cout << "[Test2] \"one\" acts\n";
+		one.attack("a bandit");
+		one.takeDamage(4);
+		one.beRepaired(3);
+		one.guardGate();
+
+		std::cout << "[Test2] constructing local \"two\" as copy of \"one\"\n";
+		ScavTrap two(one);
+		std::cout << "[Test2] \"two\" acts\n";
+		two.attack("a stalker");
+		two.takeDamage(6);
+		two.beRepaired(2);
+		two.guardGate();
+
+		std::cout << "[Test2] constructing local \"three\"\n";
+		ScavTrap three;
+		std::cout << "[Test2] \"three\" acts\n";
+		three.attack("a loader");
+		three.takeDamage(2);
+		three.beRepaired(1);
+		three.guardGate();
+
+		std::cout << "[Test2] assigning \"two\" over \"three\"\n";
+		three = two;
+		std::cout << "[Test2] \"three\" acts\n";
+		three.attack("an eridian");
+		three.takeDamage(2);
+		three.beRepaired(1);
+		three.guardGate();
+
+		std::cout << "[Test2] exiting scope\n";
+	}
+	std::cout << "==== Test2 done ====\n";
+}
+
 int main()
 {
 	test1();
+	test2();
 }
