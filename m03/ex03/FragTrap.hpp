@@ -18,4 +18,9 @@ public:
 	using ClapTrap::attack;
 	using ClapTrap::beRepaired;
 	using ClapTrap::takeDamage;
+
+protected:
+	static const unsigned int init_hitPoints = 100;
+	static const unsigned int init_energy = 100;
+	static const unsigned int init_attackDamage = 30;
 };

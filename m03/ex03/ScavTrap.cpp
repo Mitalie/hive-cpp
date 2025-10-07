@@ -7,18 +7,18 @@
 ScavTrap::ScavTrap()
 	: ClapTrap()
 {
-	hitPoints = 100;
-	energy = 50;
-	attackDamage = 20;
+	hitPoints = init_hitPoints;
+	energy = init_energy;
+	attackDamage = init_attackDamage;
 	std::cout << "Default constructing a ScavTrap\n";
 }
 
 ScavTrap::ScavTrap(std::string const &name)
 	: ClapTrap(name)
 {
-	hitPoints = 100;
-	energy = 50;
-	attackDamage = 20;
+	hitPoints = init_hitPoints;
+	energy = init_energy;
+	attackDamage = init_attackDamage;
 	std::cout << "Constructing ScavTrap " << name << "\n";
 }
 

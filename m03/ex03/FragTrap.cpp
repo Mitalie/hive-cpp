@@ -7,18 +7,18 @@
 FragTrap::FragTrap()
 	: ClapTrap()
 {
-	hitPoints = 100;
-	energy = 100;
-	attackDamage = 30;
+	hitPoints = init_hitPoints;
+	energy = init_energy;
+	attackDamage = init_attackDamage;
 	std::cout << "Default constructing a FragTrap\n";
 }
 
 FragTrap::FragTrap(std::string const &name)
 	: ClapTrap(name)
 {
-	hitPoints = 100;
-	energy = 100;
-	attackDamage = 30;
+	hitPoints = init_hitPoints;
+	energy = init_energy;
+	attackDamage = init_attackDamage;
 	std::cout << "Constructing FragTrap " << name << "\n";
 }
 
