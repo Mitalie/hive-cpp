@@ -3,6 +3,7 @@
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
 static const char BY[] = "\x1b[93m";  // Bright yellow
 static const char DY[] = "\x1b[33m";  // Dim yellow
@@ -226,6 +227,74 @@ void test8()
 	std::cout << BY << "==== Test8 done ====" << RN;
 }
 
+void test9()
+{
+	std::cout << BY << "==== Test9: DiamondTrap, sub-type with inherited members ====" << RN;
+	{
+		std::cout << DY << "[Test9] constructing local DiamondTrap \"dia\"" << RN;
+		DiamondTrap dia("Shiny");
+		std::cout << DY << "[Test9] testing DiamondTrap functions" << RN;
+		dia.whoAmI();
+		std::cout << DY << "[Test9] testing inherited functions" << RN;
+		dia.attack("a bandit");
+		dia.takeDamage(4);
+		dia.beRepaired(3);
+		dia.guardGate();
+		dia.highFivesGuys();
+		std::cout << DY << "[Test9] exiting scope" << RN;
+	}
+	std::cout << BY << "==== Test9 done ====" << RN;
+}
+
+void test10()
+{
+	std::cout << BY << "==== Test10: DiamondTrap copy construction and assignment ====" << RN;
+	{
+		std::cout << DY << "[Test10] constructing local \"one\"" << RN;
+		DiamondTrap one("Shiny");
+		std::cout << DY << "[Test10] \"one\" acts" << RN;
+		one.attack("a bandit");
+		one.takeDamage(4);
+		one.beRepaired(3);
+		one.guardGate();
+		one.highFivesGuys();
+		one.whoAmI();
+
+		std::cout << DY << "[Test10] constructing local \"two\" as copy of \"one\"" << RN;
+		DiamondTrap two(one);
+		std::cout << DY << "[Test10] \"two\" acts" << RN;
+		two.attack("a stalker");
+		two.takeDamage(6);
+		two.beRepaired(2);
+		two.guardGate();
+		two.highFivesGuys();
+		two.whoAmI();
+
+		std::cout << DY << "[Test10] constructing local \"three\"" << RN;
+		DiamondTrap three;
+		std::cout << DY << "[Test10] \"three\" acts" << RN;
+		three.attack("a loader");
+		three.takeDamage(2);
+		three.beRepaired(1);
+		three.guardGate();
+		three.highFivesGuys();
+		three.whoAmI();
+
+		std::cout << DY << "[Test10] assigning \"two\" over \"three\"" << RN;
+		three = two;
+		std::cout << DY << "[Test10] \"three\" acts" << RN;
+		three.attack("an eridian");
+		three.takeDamage(2);
+		three.beRepaired(1);
+		three.guardGate();
+		three.highFivesGuys();
+		three.whoAmI();
+
+		std::cout << DY << "[Test10] exiting scope" << RN;
+	}
+	std::cout << BY << "==== Test10 done ====" << RN;
+}
+
 int main()
 {
 	test1();
@@ -236,4 +305,6 @@ int main()
 	test6();
 	test7();
 	test8();
+	test9();
+	test10();
 }
