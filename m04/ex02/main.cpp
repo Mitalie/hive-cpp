@@ -8,8 +8,8 @@
 
 void testBasic()
 {
-	const Animal *j = new Dog();
-	const Animal *i = new Cat();
+	const AAnimal *j = new Dog();
+	const AAnimal *i = new Cat();
 	std::cout << "\x1b[33mType: >\x1b[0m" << j->getType() << "\x1b[33m<\x1b[0m\n";
 	std::cout << "\x1b[33mType: >\x1b[0m" << i->getType() << "\x1b[33m<\x1b[0m\n";
 	j->makeSound();
@@ -50,7 +50,7 @@ void testCopy()
 void testLeaks()
 {
 	int const numAnimals = 10;
-	const Animal *animals[numAnimals];
+	const AAnimal *animals[numAnimals];
 	std::cout << "\x1b[33mCreating Dogs:\x1b[0m\n";
 	for (int i = 0; i < numAnimals / 2; i++)
 		animals[i] = new Dog();

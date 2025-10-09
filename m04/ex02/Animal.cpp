@@ -2,31 +2,31 @@
 
 #include <iostream>
 
-Animal::~Animal()
+AAnimal::~AAnimal()
 {
-	std::cout << "Destructing Animal\n";
+	std::cout << "Destructing AAnimal\n";
 }
 
-Animal::Animal()
+AAnimal::AAnimal()
 	: type()
 {
-	std::cout << "Default-constructing Animal\n";
+	std::cout << "Default-constructing AAnimal\n";
 }
 
-Animal::Animal(Animal const &other)
+AAnimal::AAnimal(AAnimal const &other)
 	: type(other.type)
 {
-	std::cout << "Copy-constructing Animal\n";
+	std::cout << "Copy-constructing AAnimal\n";
 }
 
-Animal &Animal::operator=(Animal const &other)
+AAnimal &AAnimal::operator=(AAnimal const &other)
 {
 	type = other.type;
-	std::cout << "Copy-assigning Animal\n";
+	std::cout << "Copy-assigning AAnimal\n";
 	return *this;
 }
 
-std::string const &Animal::getType() const
+std::string const &AAnimal::getType() const
 {
 	return type;
 }

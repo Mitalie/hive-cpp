@@ -13,7 +13,7 @@ Cat::~Cat()
 }
 
 Cat::Cat()
-	: Animal(),
+	: AAnimal(),
 	  brain(new Brain())
 {
 	type = "Cat";
@@ -21,7 +21,7 @@ Cat::Cat()
 }
 
 Cat::Cat(Cat const &other)
-	: Animal(other),
+	: AAnimal(other),
 	  brain(new Brain(*other.brain))
 {
 	std::cout << "Copy-constructing Cat\n";
@@ -29,7 +29,7 @@ Cat::Cat(Cat const &other)
 
 Cat &Cat::operator=(Cat const &other)
 {
-	Animal::operator=(other);
+	AAnimal::operator=(other);
 	Brain *copy = new Brain(*other.brain);
 	delete brain;
 	brain = copy;

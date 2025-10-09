@@ -13,7 +13,7 @@ Dog::~Dog()
 }
 
 Dog::Dog()
-	: Animal(),
+	: AAnimal(),
 	  brain(new Brain())
 {
 	type = "Dog";
@@ -21,7 +21,7 @@ Dog::Dog()
 }
 
 Dog::Dog(Dog const &other)
-	: Animal(other),
+	: AAnimal(other),
 	  brain(new Brain(*other.brain))
 {
 	std::cout << "Copy-constructing Dog\n";
@@ -29,7 +29,7 @@ Dog::Dog(Dog const &other)
 
 Dog &Dog::operator=(Dog const &other)
 {
-	Animal::operator=(other);
+	AAnimal::operator=(other);
 	Brain *copy = new Brain(*other.brain);
 	delete brain;
 	brain = copy;
