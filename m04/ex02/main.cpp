@@ -8,16 +8,12 @@
 
 void testBasic()
 {
-	const Animal *meta = new Animal();
 	const Animal *j = new Dog();
 	const Animal *i = new Cat();
 	std::cout << "\x1b[33mType: >\x1b[0m" << j->getType() << "\x1b[33m<\x1b[0m\n";
 	std::cout << "\x1b[33mType: >\x1b[0m" << i->getType() << "\x1b[33m<\x1b[0m\n";
-	std::cout << "\x1b[33mType: >\x1b[0m" << meta->getType() << "\x1b[33m<\x1b[0m\n";
 	j->makeSound();
 	i->makeSound();
-	meta->makeSound();
-	delete meta;
 	delete j;
 	delete i;
 }
@@ -36,12 +32,6 @@ void testWrong()
 
 void testCopy()
 {
-	std::cout << "\x1b[33mAnimal:\x1b[0m\n";
-	{
-		Animal a1;
-		const Animal a2(a1);
-		a1 = a2;
-	}
 	std::cout << "\x1b[33mDog:\x1b[0m\n";
 	{
 		Dog d1;
