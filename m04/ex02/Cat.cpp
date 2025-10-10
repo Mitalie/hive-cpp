@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Brain.hpp"
 
 Cat::~Cat()
