@@ -24,8 +24,9 @@ Ice::Ice(Ice const &other)
 
 Ice &Ice::operator=(Ice const &other)
 {
-	AMateria::operator=(other);
+	// Assign AMateria base class is not allowed, but it should be identical
 	std::cout << "Copy-assigning Ice\n";
+	(void)other; // No member variables to copy
 	return *this;
 }
 

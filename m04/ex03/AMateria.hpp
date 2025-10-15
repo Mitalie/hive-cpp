@@ -18,12 +18,12 @@ protected:
 	AMateria(std::string const &type);
 	// Only derived classes may copy
 	AMateria(AMateria const &other);
-	// Only derived classes may assign
-	AMateria &operator=(AMateria const &other);
 
 private:
 	// Default construction is forbidden, type is required
 	AMateria();
+	// Assignment to change type is forbidden, only derived classes of matching type should be assigned
+	AMateria &operator=(AMateria const &other);
 
 	std::string type;
 };

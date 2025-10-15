@@ -24,8 +24,9 @@ Cure::Cure(Cure const &other)
 
 Cure &Cure::operator=(Cure const &other)
 {
-	AMateria::operator=(other);
+	// Assign AMateria base class is not allowed, but it should be identical
 	std::cout << "Copy-assigning Cure\n";
+	(void)other; // No member variables to copy
 	return *this;
 }
 

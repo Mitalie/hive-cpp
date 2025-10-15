@@ -24,10 +24,3 @@ AMateria::AMateria(AMateria const &other)
 {
 	std::cout << "Copy-constructing AMateria of type \"" << type << "\"\n";
 }
-
-AMateria &AMateria::operator=(AMateria const &other)
-{
-	type = other.type;
-	std::cout << "Copy-assigning AMateria of type \"" << type << "\"\n";
-	return *this;
-}
