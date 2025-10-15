@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "AMateria.hpp"
+#include "Character.hpp"
 #include "Cure.hpp"
 #include "Ice.hpp"
 
@@ -18,6 +19,14 @@ void testOCF()
 		Ice ice2(ice);
 		ice = ice2;
 	}
+	std::cout << "\x1b[33mCharacter:\x1b[0m\n";
+	{
+		Character c;
+		Character c2("Test");
+		Character c3(c2);
+		c2 = c;
+		c = c3;
+	}
 }
 
 void testMatPolymorphic()
@@ -28,8 +37,11 @@ void testMatPolymorphic()
 	AMateria &mat1 = cure;
 	AMateria &mat2 = ice;
 	std::cout << "\x1b[33mUsing via AMateria references:\x1b[0m\n";
-	// FIXME: implement once a concrete implementation of ICharacter is available
-	std::cout << "\x1b[31m  Test not implemented yet\x1b[0m\n";
+	{
+		Character c("Tractice Parget");
+		mat1.use(c);
+		mat2.use(c);
+	}
 	std::cout << "\x1b[33mCloning via AMateria references:\x1b[0m\n";
 	AMateria *clone1 = mat1.clone();
 	AMateria *clone2 = mat2.clone();
