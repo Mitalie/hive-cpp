@@ -5,6 +5,7 @@
 
 #include "AMateria.hpp"
 #include "ICharacter.hpp"
+#include "MateriaDiscard.hpp"
 
 Character::~Character()
 {
@@ -59,19 +60,46 @@ std::string const &Character::getName() const
 
 void Character::equip(AMateria *m)
 {
-	// TODO
-	(void)m;
+	std::cout << "Character \"" << name << "\" equips materia of type \"" << m->getType() << "\"...";
+	for (unsigned int i = 0; i < invSize; ++i)
+	{
+		if (!inventory[i])
+		{
+			inventory[i] = m;
+			std::cout << " selected inventory slot " << i << "\n";
+			return;
+		}
+	}
+	std::cout << " discarding it as inventory is full\n";
+	MateriaDiscard::discard(m);
 }
 
 void Character::unequip(int idx)
 {
-	// TODO
-	(void)idx;
+	std::cout << "Character \"" << name << "\" unequips materia in inventory slot " << idx << "...";
+	if (idx >= 0 && idx < invSize && inventory[idx])
+	{
+		AMateria *m = inventory[idx];
+		inventory[idx] = 0;
+		std::cout << " discarding materia of type \"" << m->getType() << "\"\n";
+		MateriaDiscard::discard(m);
+	}
+	else if (idx >= 0 && idx < invSize)
+		std::cout << " slot is empty\n";
+	else
+		std::cout << " slot is invalid\n";
 }
 
 void Character::use(int idx, ICharacter &target)
 {
-	// TODO
-	(void)idx;
-	(void)target;
+	std::cout << "Character \"" << name << "\" uses materia in inventory slot " << idx << "...";
+	if (idx >= 0 && idx < invSize && inventory[idx])
+	{
+		std::cout << "\n";
+		inventory[idx]->use(target);
+	}
+	else if (idx >= 0 && idx < invSize)
+		std::cout << " slot is empty\n";
+	else
+		std::cout << " slot is invalid\n";
 }
