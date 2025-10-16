@@ -6,6 +6,7 @@ SRCS := \
 	Character.cpp \
 	Cure.cpp \
 	Ice.cpp \
+	MateriaDiscard.cpp \
 	MateriaSource.cpp \
 
 CXX := c++
