@@ -97,6 +97,11 @@ void testCharMatDiscard()
 	MateriaDiscard::clear();
 }
 
+void testCharDeep()
+{
+	// TODO
+}
+
 int main()
 {
 	std::cout << "\x1b[93m==== Test 1: Classes implement OCF ====\x1b[0m\n";
