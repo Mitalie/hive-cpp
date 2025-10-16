@@ -21,4 +21,6 @@ public:
 
 private:
 	std::string name;
+	static const int invSize = 4;
+	AMateria *inventory[invSize];
 };
