@@ -5,6 +5,7 @@
 #include "Cure.hpp"
 #include "Ice.hpp"
 #include "MateriaDiscard.hpp"
+#include "MateriaSource.hpp"
 
 void testOCF()
 {
@@ -27,6 +28,12 @@ void testOCF()
 		Character c3(c2);
 		c2 = c;
 		c = c3;
+	}
+	std::cout << "\x1b[33mMateriaSource:\x1b[0m\n";
+	{
+		MateriaSource s;
+		MateriaSource s2(s);
+		s = s2;
 	}
 }
 
@@ -132,6 +139,41 @@ void testCharDeep()
 	std::cout << "\x1b[33mExiting scope\x1b[0m\n";
 }
 
+void testSource()
+{
+	std::cout << "\x1b[33mCreating materia source\x1b[0m\n";
+	MateriaSource s;
+	std::cout << "\x1b[33mLearning a materia\x1b[0m\n";
+	AMateria *ice = new Ice;
+	s.learnMateria(ice);
+	std::cout << "\x1b[33mDestroying original as source should've created a copy\x1b[0m\n";
+	delete ice;
+	std::cout << "\x1b[33mCreating materia through the source\x1b[0m\n";
+	AMateria *m1 = s.createMateria("ice");
+	std::cout << "\x1b[33mCreated materia 1 at address: \x1b[0m" << m1 << "\n";
+	AMateria *m2 = s.createMateria("ice");
+	std::cout << "\x1b[33mCreated materia 2 at address: \x1b[0m" << m2 << "\n";
+	std::cout << "\x1b[33mCan't create materia of unlearned types\x1b[0m\n";
+	AMateria *m3 = s.createMateria("cure");
+	std::cout << "\x1b[33mCreated materia 3 at address: \x1b[0m" << m3 << "\n";
+	std::cout << "\x1b[33mLearning some duplicates\x1b[0m\n";
+	s.learnMateria(m1);
+	s.learnMateria(m1);
+	s.learnMateria(m1);
+	std::cout << "\x1b[33mCan't learn more if all slots used\x1b[0m\n";
+	AMateria *cure = new Cure;
+	s.learnMateria(cure);
+	AMateria *m4 = s.createMateria("cure");
+	std::cout << "\x1b[33mCreated materia 4 at address: \x1b[0m" << m4 << "\n";
+	std::cout << "\x1b[33mDeleting materia\x1b[0m\n";
+	delete m1;
+	delete m2;
+	delete m3;
+	delete cure;
+	delete m4;
+	std::cout << "\x1b[33mExiting scope\x1b[0m\n";
+}
+
 int main()
 {
 	std::cout << "\x1b[93m==== Test 1: Classes implement OCF ====\x1b[0m\n";
@@ -144,5 +186,7 @@ int main()
 	testCharMatDiscard();
 	std::cout << "\x1b[93m==== Test 5: Character copies are deep copies ====\x1b[0m\n";
 	testCharDeep();
+	std::cout << "\x1b[93m==== Test 6: MateriaSource works as required ====\x1b[0m\n";
+	testSource();
 	std::cout << "\x1b[93m==== Done ====\x1b[0m\n";
 }
