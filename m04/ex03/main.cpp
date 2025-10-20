@@ -1,3 +1,4 @@
+#include <exception>
 #include <iostream>
 
 #include "AMateria.hpp"
@@ -176,17 +177,30 @@ void testSource()
 
 int main()
 {
-	std::cout << "\x1b[93m==== Test 1: Classes implement OCF ====\x1b[0m\n";
-	testOCF();
-	std::cout << "\x1b[93m==== Test 2: Cure and Ice implement AMateria ====\x1b[0m\n";
-	testMatPolymorphic();
-	std::cout << "\x1b[93m==== Test 3: Character can equip and use materia ====\x1b[0m\n";
-	testCharMatUse();
-	std::cout << "\x1b[93m==== Test 4: Character can handle full inventory and unequip materia ====\x1b[0m\n";
-	testCharMatDiscard();
-	std::cout << "\x1b[93m==== Test 5: Character copies are deep copies ====\x1b[0m\n";
-	testCharDeep();
-	std::cout << "\x1b[93m==== Test 6: MateriaSource works as required ====\x1b[0m\n";
-	testSource();
-	std::cout << "\x1b[93m==== Done ====\x1b[0m\n";
+	try
+	{
+		std::cout << "\x1b[93m==== Test 1: Classes implement OCF ====\x1b[0m\n";
+		testOCF();
+		std::cout << "\x1b[93m==== Test 2: Cure and Ice implement AMateria ====\x1b[0m\n";
+		testMatPolymorphic();
+		std::cout << "\x1b[93m==== Test 3: Character can equip and use materia ====\x1b[0m\n";
+		testCharMatUse();
+		std::cout << "\x1b[93m==== Test 4: Character can handle full inventory and unequip materia ====\x1b[0m\n";
+		testCharMatDiscard();
+		std::cout << "\x1b[93m==== Test 5: Character copies are deep copies ====\x1b[0m\n";
+		testCharDeep();
+		std::cout << "\x1b[93m==== Test 6: MateriaSource works as required ====\x1b[0m\n";
+		testSource();
+		std::cout << "\x1b[93m==== Done ====\x1b[0m\n";
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
+	}
 }

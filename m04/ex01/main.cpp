@@ -1,3 +1,4 @@
+#include <exception>
 #include <iostream>
 
 #include "Animal.hpp"
@@ -117,15 +118,28 @@ void testDeep()
 
 int main()
 {
-	std::cout << "\x1b[93m==== Test 1: Basic requirements ====\x1b[0m\n";
-	testBasic();
-	std::cout << "\x1b[93m==== Test 2: Copying ====\x1b[0m\n";
-	testCopy();
-	std::cout << "\x1b[93m==== Test 3: Doing it wrong ====\x1b[0m\n";
-	testWrong();
-	std::cout << "\x1b[93m==== Test 4: Don't leak Brains (check with valgrind) ====\x1b[0m\n";
-	testLeaks();
-	std::cout << "\x1b[93m==== Test 5: Don't share Brains ====\x1b[0m\n";
-	testDeep();
-	std::cout << "\x1b[93m==== Done ====\x1b[0m\n";
+	try
+	{
+		std::cout << "\x1b[93m==== Test 1: Basic requirements ====\x1b[0m\n";
+		testBasic();
+		std::cout << "\x1b[93m==== Test 2: Copying ====\x1b[0m\n";
+		testCopy();
+		std::cout << "\x1b[93m==== Test 3: Doing it wrong ====\x1b[0m\n";
+		testWrong();
+		std::cout << "\x1b[93m==== Test 4: Don't leak Brains (check with valgrind) ====\x1b[0m\n";
+		testLeaks();
+		std::cout << "\x1b[93m==== Test 5: Don't share Brains ====\x1b[0m\n";
+		testDeep();
+		std::cout << "\x1b[93m==== Done ====\x1b[0m\n";
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
+	}
 }
