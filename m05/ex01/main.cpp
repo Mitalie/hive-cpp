@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 #define RED "\x1b[31m"
 #define GREEN "\x1b[32m"
@@ -96,6 +97,70 @@ void testBureaucratIncDec()
 	PRINT_VALUE(b2)
 }
 
+void testFormCons()
+{
+	std::cout << YELLOW "- accepts any valid grade as requirement for signing" RSTN;
+	for (int i = 1; i <= 150; i++)
+		Form f("Test Name", i, 3);
+	std::cout << YELLOW "- accepts any valid grade as requirement for execution" RSTN;
+	for (int i = 1; i <= 150; i++)
+		Form f("Test Name", 3, i);
+	std::cout << YELLOW "- rejects invalid grades as requirement for signing with appropriate exceptions" RSTN;
+	PRINT_CODE_THROWING(
+		Form::GradeTooHighException,
+		Form f("Test Name", 0, 3);)
+	PRINT_CODE_THROWING(
+		Form::GradeTooHighException,
+		Form f("Test Name", -1, 3);)
+	PRINT_CODE_THROWING(
+		Form::GradeTooHighException,
+		Form f("Test Name", INT_MIN, 3);)
+	PRINT_CODE_THROWING(
+		Form::GradeTooLowException,
+		Form f("Test Name", 151, 3);)
+	PRINT_CODE_THROWING(
+		Form::GradeTooLowException,
+		Form f("Test Name", INT_MAX, 3);)
+	std::cout << YELLOW "- rejects invalid grades as requirement for execution with appropriate exceptions" RSTN;
+	PRINT_CODE_THROWING(
+		Form::GradeTooHighException,
+		Form f("Test Name", 3, 0);)
+	PRINT_CODE_THROWING(
+		Form::GradeTooHighException,
+		Form f("Test Name", 3, -1);)
+	PRINT_CODE_THROWING(
+		Form::GradeTooHighException,
+		Form f("Test Name", 3, INT_MIN);)
+	PRINT_CODE_THROWING(
+		Form::GradeTooLowException,
+		Form f("Test Name", 3, 151);)
+	PRINT_CODE_THROWING(
+		Form::GradeTooLowException,
+		Form f("Test Name", 3, INT_MAX);)
+}
+
+void testFormInfo()
+{
+	Form f1("Frm1", 2, 42);
+	Form f2("Frm2", 149, 109);
+	std::cout << YELLOW "- name getter" RSTN;
+	PRINT_VALUE(f1.getName())
+	PRINT_VALUE(f2.getName())
+	std::cout << YELLOW "- grade for signing getter" RSTN;
+	PRINT_VALUE(f1.getGradeRequiredToSign())
+	PRINT_VALUE(f2.getGradeRequiredToSign())
+	std::cout << YELLOW "- grade for execution getter" RSTN;
+	PRINT_VALUE(f1.getGradeRequiredToExecute())
+	PRINT_VALUE(f2.getGradeRequiredToExecute())
+	std::cout << YELLOW "- signing status getter" RSTN;
+	std::cout << std::boolalpha; // print bools as true/false instead of 1/0
+	PRINT_VALUE(f1.getIsSigned())
+	PRINT_VALUE(f2.getIsSigned())
+	std::cout << YELLOW "- stream output operator" RSTN;
+	PRINT_VALUE(f1)
+	PRINT_VALUE(f2)
+}
+
 int main()
 {
 	std::cout << BYELLOW "==== Test 1: Bureaucrat construction ====" RSTN;
@@ -104,4 +169,8 @@ int main()
 	testBureaucratInfo();
 	std::cout << BYELLOW "==== Test 3: Bureaucrat increment and decrement ====" RSTN;
 	testBureaucratIncDec();
+	std::cout << BYELLOW "==== Test 4: Form construction ====" RSTN;
+	testFormCons();
+	std::cout << BYELLOW "==== Test 5: Form information ====" RSTN;
+	testFormInfo();
 }
