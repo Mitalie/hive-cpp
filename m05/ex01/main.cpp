@@ -161,6 +161,36 @@ void testFormInfo()
 	PRINT_VALUE(f2)
 }
 
+void testSigning()
+{
+	std::cout << YELLOW "- bureaucrat of insufficient level can't sign form" RSTN;
+	Form f1("Frm1", 20, 50);
+	Bureaucrat b1("Name One", 40);
+	PRINT_VALUE(f1);
+	PRINT_VALUE(b1);
+	PRINT_CODE(b1.signForm(f1);)
+	PRINT_VALUE(f1);
+	std::cout << YELLOW "- bureaucrat of sufficient level can sign form" RSTN;
+	Form f2("Frm2", 30, 50);
+	Bureaucrat b2("Name Two", 10);
+	PRINT_VALUE(f2);
+	PRINT_VALUE(b2);
+	PRINT_CODE(b2.signForm(f2);)
+	PRINT_VALUE(f2);
+	std::cout << YELLOW "- Form::beSigned checks signer grade" RSTN;
+	Form f3("Frm3", 3, 99);
+	Bureaucrat b3("Name Three", 4);
+	PRINT_VALUE(f3);
+	PRINT_VALUE(b3);
+	PRINT_CODE_THROWING(
+		Form::GradeTooLowException,
+		f3.beSigned(b3);)
+	PRINT_CODE(b3.promote();)
+	PRINT_VALUE(b3);
+	PRINT_CODE(f3.beSigned(b3);)
+	PRINT_VALUE(f3);
+}
+
 int main()
 {
 	std::cout << BYELLOW "==== Test 1: Bureaucrat construction ====" RSTN;
@@ -173,4 +203,6 @@ int main()
 	testFormCons();
 	std::cout << BYELLOW "==== Test 5: Form information ====" RSTN;
 	testFormInfo();
+	std::cout << BYELLOW "==== Test 6: Signing forms ====" RSTN;
+	testSigning();
 }
