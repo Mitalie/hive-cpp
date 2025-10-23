@@ -1,8 +1,10 @@
 #include "Bureaucrat.hpp"
 
-#include <ostream>
+#include <iostream>
 #include <string>
 #include <stdexcept>
+
+#include "Form.hpp"
 
 Bureaucrat::GradeTooHighException::GradeTooHighException()
 	: std::logic_error("Grade too high for Bureaucrat")
@@ -55,6 +57,20 @@ void Bureaucrat::demote()
 	if (grade >= maxGrade)
 		throw GradeTooLowException();
 	grade++;
+}
+
+void Bureaucrat::signForm(Form &f) const
+{
+	try
+	{
+		f.beSigned(*this);
+		std::cout << name << " signed form " << f.getName() << "\n";
+	}
+	catch (Form::GradeTooLowException const &e)
+	{
+		std::cout << name << " couldn't sign form " << f.getName()
+				  << " because: " << e.what() << "\n";
+	}
 }
 
 std::ostream &operator<<(std::ostream &os, Bureaucrat const &b)
