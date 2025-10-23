@@ -3,6 +3,7 @@ NAME := test
 SRCS := \
 	main.cpp \
 	Bureaucrat.cpp \
+	Form.cpp \
 
 CXX := c++
 CPPFLAGS := -MMD -MP
