@@ -5,12 +5,12 @@
 #include <stdexcept>
 
 Bureaucrat::GradeTooHighException::GradeTooHighException()
-	: std::logic_error("Bureaucrat grade too high")
+	: std::logic_error("Grade too high for Bureaucrat")
 {
 }
 
 Bureaucrat::GradeTooLowException::GradeTooLowException()
-	: std::logic_error("Bureaucrat grade too low")
+	: std::logic_error("Grade too high for Bureaucrat")
 {
 }
 
