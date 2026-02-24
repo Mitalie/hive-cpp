@@ -1,5 +1,6 @@
 #include "PresidentialPardonForm.hpp"
 
+#include <iostream>
 #include <string>
 
 #include "AForm.hpp"
@@ -17,5 +18,5 @@ PresidentialPardonForm::PresidentialPardonForm(std::string const &target)
 
 void PresidentialPardonForm::action() const
 {
-	// TODO
+	std::cout << getTarget() << " has been pardoned by Zaphod Beeblebrox\n";
 }

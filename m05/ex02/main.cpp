@@ -261,6 +261,57 @@ void testConcreteInfo()
 	PRINT_VALUE(p);
 }
 
+void testConcreteExec()
+{
+	Bureaucrat low("Low Grade", 150);
+	Bureaucrat high("High Grade", 1);
+	{
+		std::cout << YELLOW "- ShrubberyCreationForm checks requirements and can be executed" RSTN;
+		ShrubberyCreationForm s("Copilot");
+		PRINT_CODE_THROWING(
+			AForm::NotSignedException,
+			s.execute(high);)
+		PRINT_CODE_THROWING(
+			AForm::GradeTooLowException,
+			s.beSigned(low);)
+		PRINT_CODE(s.beSigned(high);)
+		PRINT_CODE_THROWING(
+			AForm::GradeTooLowException,
+			s.execute(low);)
+		PRINT_CODE(s.execute(high);)
+	}
+	{
+		std::cout << YELLOW "- RobotomyRequestForm checks requirements and can be executed" RSTN;
+		RobotomyRequestForm r("Claude");
+		PRINT_CODE_THROWING(
+			AForm::NotSignedException,
+			r.execute(high);)
+		PRINT_CODE_THROWING(
+			AForm::GradeTooLowException,
+			r.beSigned(low);)
+		PRINT_CODE(r.beSigned(high);)
+		PRINT_CODE_THROWING(
+			AForm::GradeTooLowException,
+			r.execute(low);)
+		PRINT_CODE(r.execute(high);)
+	}
+	{
+		std::cout << YELLOW "- PresidentialPardonForm checks requirements and can be executed" RSTN;
+		PresidentialPardonForm p("ChatGPT");
+		PRINT_CODE_THROWING(
+			AForm::NotSignedException,
+			p.execute(high);)
+		PRINT_CODE_THROWING(
+			AForm::GradeTooLowException,
+			p.beSigned(low);)
+		PRINT_CODE(p.beSigned(high);)
+		PRINT_CODE_THROWING(
+			AForm::GradeTooLowException,
+			p.execute(low);)
+		PRINT_CODE(p.execute(high);)
+	}
+}
+
 int main()
 {
 	std::cout << BYELLOW "==== Test 1: Bureaucrat construction ====" RSTN;
@@ -279,4 +330,6 @@ int main()
 	testExecution();
 	std::cout << BYELLOW "==== Test 8: Concrete forms construction and information ====" RSTN;
 	testConcreteInfo();
+	std::cout << BYELLOW "==== Test 9: Concrete forms signing and execution ====" RSTN;
+	testConcreteExec();
 }
