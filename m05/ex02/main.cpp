@@ -3,6 +3,9 @@
 
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 #define RED "\x1b[31m"
 #define GREEN "\x1b[32m"
@@ -233,6 +236,31 @@ void testExecution()
 	PRINT_CODE(s.execute(high);)
 }
 
+void testConcreteInfo()
+{
+	std::cout << YELLOW "- ShrubberyCreationForm" RSTN;
+	ShrubberyCreationForm s("Copilot");
+	PRINT_VALUE(s.getName());
+	PRINT_VALUE(s.getTarget());
+	PRINT_VALUE(s.getGradeRequiredToSign());
+	PRINT_VALUE(s.getGradeRequiredToExecute());
+	PRINT_VALUE(s);
+	std::cout << YELLOW "- RobotomyRequestForm" RSTN;
+	RobotomyRequestForm r("Claude");
+	PRINT_VALUE(r.getName());
+	PRINT_VALUE(r.getTarget());
+	PRINT_VALUE(r.getGradeRequiredToSign());
+	PRINT_VALUE(r.getGradeRequiredToExecute());
+	PRINT_VALUE(r);
+	std::cout << YELLOW "- PresidentialPardonForm" RSTN;
+	PresidentialPardonForm p("ChatGPT");
+	PRINT_VALUE(p.getName());
+	PRINT_VALUE(p.getTarget());
+	PRINT_VALUE(p.getGradeRequiredToSign());
+	PRINT_VALUE(p.getGradeRequiredToExecute());
+	PRINT_VALUE(p);
+}
+
 int main()
 {
 	std::cout << BYELLOW "==== Test 1: Bureaucrat construction ====" RSTN;
@@ -249,4 +277,6 @@ int main()
 	testSigning();
 	std::cout << BYELLOW "==== Test 7: Executing forms ====" RSTN;
 	testExecution();
+	std::cout << BYELLOW "==== Test 8: Concrete forms construction and information ====" RSTN;
+	testConcreteInfo();
 }
