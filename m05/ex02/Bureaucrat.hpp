@@ -4,7 +4,7 @@
 #include <string>
 #include <stdexcept>
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -28,7 +28,7 @@ public:
 	int getGrade() const;
 	void promote();
 	void demote();
-	void signForm(Form &f) const;
+	void signForm(AForm &f) const;
 
 private:
 	// default constructor forbidden, name and grade required

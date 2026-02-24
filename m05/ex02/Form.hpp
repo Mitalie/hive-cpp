@@ -6,15 +6,15 @@
 
 class Bureaucrat;
 
-class Form
+class AForm
 {
 public:
-	~Form();
-	Form(
+	virtual ~AForm() = 0;
+	AForm(
 		std::string const &name,
 		int gradeRequiredToSign,
 		int gradeRequiredToExecute);
-	Form(Form const &other);
+	AForm(AForm const &other);
 
 	class GradeTooHighException : public std::logic_error
 	{
@@ -35,9 +35,9 @@ public:
 
 private:
 	// default constructor forbidden, name and grade requirements required
-	Form();
+	AForm();
 	// assignment forbidden, name and grade requirements are const
-	Form &operator=(Form const &other);
+	AForm &operator=(AForm const &other);
 
 	std::string const name;
 	int const gradeRequiredToSign;
@@ -48,4 +48,4 @@ private:
 	static int const maxGrade = 150;
 };
 
-std::ostream &operator<<(std::ostream &os, Form const &f);
+std::ostream &operator<<(std::ostream &os, AForm const &f);

@@ -97,52 +97,62 @@ void testBureaucratIncDec()
 	PRINT_VALUE(b2)
 }
 
+// Mock derived class to test abstract class AForm
+class TestAForm : public AForm
+{
+public:
+	TestAForm(std::string const &name, int gradeRequiredToSign, int gradeRequiredToExecute)
+		: AForm(name, gradeRequiredToSign, gradeRequiredToExecute)
+	{
+	}
+};
+
 void testFormCons()
 {
 	std::cout << YELLOW "- accepts any valid grade as requirement for signing" RSTN;
 	for (int i = 1; i <= 150; i++)
-		Form f("Test Name", i, 3);
+		TestAForm f("Test Name", i, 3);
 	std::cout << YELLOW "- accepts any valid grade as requirement for execution" RSTN;
 	for (int i = 1; i <= 150; i++)
-		Form f("Test Name", 3, i);
+		TestAForm f("Test Name", 3, i);
 	std::cout << YELLOW "- rejects invalid grades as requirement for signing with appropriate exceptions" RSTN;
 	PRINT_CODE_THROWING(
-		Form::GradeTooHighException,
-		Form f("Test Name", 0, 3);)
+		AForm::GradeTooHighException,
+		TestAForm f("Test Name", 0, 3);)
 	PRINT_CODE_THROWING(
-		Form::GradeTooHighException,
-		Form f("Test Name", -1, 3);)
+		AForm::GradeTooHighException,
+		TestAForm f("Test Name", -1, 3);)
 	PRINT_CODE_THROWING(
-		Form::GradeTooHighException,
-		Form f("Test Name", INT_MIN, 3);)
+		AForm::GradeTooHighException,
+		TestAForm f("Test Name", INT_MIN, 3);)
 	PRINT_CODE_THROWING(
-		Form::GradeTooLowException,
-		Form f("Test Name", 151, 3);)
+		AForm::GradeTooLowException,
+		TestAForm f("Test Name", 151, 3);)
 	PRINT_CODE_THROWING(
-		Form::GradeTooLowException,
-		Form f("Test Name", INT_MAX, 3);)
+		AForm::GradeTooLowException,
+		TestAForm f("Test Name", INT_MAX, 3);)
 	std::cout << YELLOW "- rejects invalid grades as requirement for execution with appropriate exceptions" RSTN;
 	PRINT_CODE_THROWING(
-		Form::GradeTooHighException,
-		Form f("Test Name", 3, 0);)
+		AForm::GradeTooHighException,
+		TestAForm f("Test Name", 3, 0);)
 	PRINT_CODE_THROWING(
-		Form::GradeTooHighException,
-		Form f("Test Name", 3, -1);)
+		AForm::GradeTooHighException,
+		TestAForm f("Test Name", 3, -1);)
 	PRINT_CODE_THROWING(
-		Form::GradeTooHighException,
-		Form f("Test Name", 3, INT_MIN);)
+		AForm::GradeTooHighException,
+		TestAForm f("Test Name", 3, INT_MIN);)
 	PRINT_CODE_THROWING(
-		Form::GradeTooLowException,
-		Form f("Test Name", 3, 151);)
+		AForm::GradeTooLowException,
+		TestAForm f("Test Name", 3, 151);)
 	PRINT_CODE_THROWING(
-		Form::GradeTooLowException,
-		Form f("Test Name", 3, INT_MAX);)
+		AForm::GradeTooLowException,
+		TestAForm f("Test Name", 3, INT_MAX);)
 }
 
 void testFormInfo()
 {
-	Form f1("Frm1", 2, 42);
-	Form f2("Frm2", 149, 109);
+	TestAForm f1("Frm1", 2, 42);
+	TestAForm f2("Frm2", 149, 109);
 	std::cout << YELLOW "- name getter" RSTN;
 	PRINT_VALUE(f1.getName())
 	PRINT_VALUE(f2.getName())
@@ -164,26 +174,26 @@ void testFormInfo()
 void testSigning()
 {
 	std::cout << YELLOW "- bureaucrat of insufficient level can't sign form" RSTN;
-	Form f1("Frm1", 20, 50);
+	TestAForm f1("Frm1", 20, 50);
 	Bureaucrat b1("Name One", 40);
 	PRINT_VALUE(f1);
 	PRINT_VALUE(b1);
 	PRINT_CODE(b1.signForm(f1);)
 	PRINT_VALUE(f1);
 	std::cout << YELLOW "- bureaucrat of sufficient level can sign form" RSTN;
-	Form f2("Frm2", 30, 50);
+	TestAForm f2("Frm2", 30, 50);
 	Bureaucrat b2("Name Two", 10);
 	PRINT_VALUE(f2);
 	PRINT_VALUE(b2);
 	PRINT_CODE(b2.signForm(f2);)
 	PRINT_VALUE(f2);
-	std::cout << YELLOW "- Form::beSigned checks signer grade" RSTN;
-	Form f3("Frm3", 3, 99);
+	std::cout << YELLOW "- AForm::beSigned checks signer grade" RSTN;
+	TestAForm f3("Frm3", 3, 99);
 	Bureaucrat b3("Name Three", 4);
 	PRINT_VALUE(f3);
 	PRINT_VALUE(b3);
 	PRINT_CODE_THROWING(
-		Form::GradeTooLowException,
+		AForm::GradeTooLowException,
 		f3.beSigned(b3);)
 	PRINT_CODE(b3.promote();)
 	PRINT_VALUE(b3);
@@ -199,9 +209,9 @@ int main()
 	testBureaucratInfo();
 	std::cout << BYELLOW "==== Test 3: Bureaucrat increment and decrement ====" RSTN;
 	testBureaucratIncDec();
-	std::cout << BYELLOW "==== Test 4: Form construction ====" RSTN;
+	std::cout << BYELLOW "==== Test 4: AForm construction ====" RSTN;
 	testFormCons();
-	std::cout << BYELLOW "==== Test 5: Form information ====" RSTN;
+	std::cout << BYELLOW "==== Test 5: AForm information ====" RSTN;
 	testFormInfo();
 	std::cout << BYELLOW "==== Test 6: Signing forms ====" RSTN;
 	testSigning();

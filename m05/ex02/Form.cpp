@@ -6,21 +6,21 @@
 
 #include "Bureaucrat.hpp"
 
-Form::GradeTooHighException::GradeTooHighException()
-	: std::logic_error("Grade too high for Form")
+AForm::GradeTooHighException::GradeTooHighException()
+	: std::logic_error("Grade too high for form")
 {
 }
 
-Form::GradeTooLowException::GradeTooLowException()
-	: std::logic_error("Grade too low for Form")
+AForm::GradeTooLowException::GradeTooLowException()
+	: std::logic_error("Grade too low for form")
 {
 }
 
-Form::~Form()
+AForm::~AForm()
 {
 }
 
-Form::Form(
+AForm::AForm(
 	std::string const &name,
 	int gradeRequiredToSign,
 	int gradeRequiredToExecute)
@@ -39,41 +39,41 @@ Form::Form(
 		throw GradeTooLowException();
 }
 
-Form::Form(Form const &other)
+AForm::AForm(AForm const &other)
 	: name(other.name),
 	  gradeRequiredToSign(other.gradeRequiredToSign),
 	  gradeRequiredToExecute(other.gradeRequiredToExecute)
 {
 }
 
-std::string const &Form::getName() const
+std::string const &AForm::getName() const
 {
 	return name;
 }
 
-int Form::getGradeRequiredToSign() const
+int AForm::getGradeRequiredToSign() const
 {
 	return gradeRequiredToSign;
 }
 
-int Form::getGradeRequiredToExecute() const
+int AForm::getGradeRequiredToExecute() const
 {
 	return gradeRequiredToExecute;
 }
 
-bool Form::getIsSigned() const
+bool AForm::getIsSigned() const
 {
 	return isSigned;
 }
 
-void Form::beSigned(Bureaucrat const &signer)
+void AForm::beSigned(Bureaucrat const &signer)
 {
 	if (signer.getGrade() > gradeRequiredToSign)
 		throw GradeTooLowException();
 	isSigned = true;
 }
 
-std::ostream &operator<<(std::ostream &os, Form const &f)
+std::ostream &operator<<(std::ostream &os, AForm const &f)
 {
 	os << f.getName()
 	   << ", a form requiring a bureaucrat of grade "
