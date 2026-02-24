@@ -4,6 +4,9 @@ SRCS := \
 	main.cpp \
 	AForm.cpp \
 	Bureaucrat.cpp \
+	PresidentialPardonForm.cpp \
+	RobotomyRequestForm.cpp \
+	ShrubberyCreationForm.cpp \
 
 CXX := c++
 CPPFLAGS := -MMD -MP
