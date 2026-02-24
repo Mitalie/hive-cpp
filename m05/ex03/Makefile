@@ -4,6 +4,7 @@ SRCS := \
 	main.cpp \
 	AForm.cpp \
 	Bureaucrat.cpp \
+	Intern.cpp \
 	PresidentialPardonForm.cpp \
 	RobotomyRequestForm.cpp \
 	ShrubberyCreationForm.cpp \
