@@ -3,6 +3,7 @@
 
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
+#include "Intern.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
@@ -312,6 +313,32 @@ void testConcreteExec()
 	}
 }
 
+void testIntern()
+{
+	Intern i;
+	Bureaucrat b("Bure Au", 1);
+	AForm *scf, *rrf, *ppf, *unk;
+
+	std::cout << YELLOW "- Intern can create forms" RSTN;
+	PRINT_CODE(scf = i.makeForm("shrubbery creation", "Copilot");)
+	PRINT_CODE(rrf = i.makeForm("robotomy request", "Claude");)
+	PRINT_CODE(ppf = i.makeForm("presidential pardon", "ChatGPT");)
+	std::cout << YELLOW "- Intern handles unknown form types and returns null pointer" RSTN;
+	PRINT_CODE(unk = i.makeForm("enhanced hallucination", "Gemini");)
+	PRINT_VALUE(unk);
+	std::cout << YELLOW "- Created forms are functional" RSTN;
+	PRINT_CODE(b.signForm(*scf);)
+	PRINT_CODE(b.executeForm(*scf);)
+	PRINT_CODE(b.signForm(*rrf);)
+	PRINT_CODE(b.executeForm(*rrf);)
+	PRINT_CODE(b.signForm(*ppf);)
+	PRINT_CODE(b.executeForm(*ppf);)
+	std::cout << YELLOW "- Created forms can be deleted" RSTN;
+	PRINT_CODE(delete scf;)
+	PRINT_CODE(delete rrf;)
+	PRINT_CODE(delete ppf;)
+}
+
 int main()
 {
 	std::cout << BYELLOW "==== Test 1: Bureaucrat construction ====" RSTN;
@@ -332,4 +359,6 @@ int main()
 	testConcreteInfo();
 	std::cout << BYELLOW "==== Test 9: Concrete forms signing and execution ====" RSTN;
 	testConcreteExec();
+	std::cout << BYELLOW "==== Test 10: Intern ====" RSTN;
+	testIntern();
 }
