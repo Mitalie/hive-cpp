@@ -102,7 +102,7 @@ class TestAForm : public AForm
 {
 public:
 	TestAForm(std::string const &name, int gradeRequiredToSign, int gradeRequiredToExecute)
-		: AForm(name, gradeRequiredToSign, gradeRequiredToExecute)
+		: AForm(name, "<no target>", gradeRequiredToSign, gradeRequiredToExecute)
 	{
 	}
 };
@@ -156,6 +156,9 @@ void testFormInfo()
 	std::cout << YELLOW "- name getter" RSTN;
 	PRINT_VALUE(f1.getName())
 	PRINT_VALUE(f2.getName())
+	std::cout << YELLOW "- target getter" RSTN;
+	PRINT_VALUE(f1.getTarget())
+	PRINT_VALUE(f2.getTarget())
 	std::cout << YELLOW "- grade for signing getter" RSTN;
 	PRINT_VALUE(f1.getGradeRequiredToSign())
 	PRINT_VALUE(f2.getGradeRequiredToSign())

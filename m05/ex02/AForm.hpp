@@ -12,6 +12,7 @@ public:
 	virtual ~AForm() = 0;
 	AForm(
 		std::string const &name,
+		std::string const &target,
 		int gradeRequiredToSign,
 		int gradeRequiredToExecute);
 	AForm(AForm const &other);
@@ -28,6 +29,7 @@ public:
 	};
 
 	std::string const &getName() const;
+	std::string const &getTarget() const;
 	int getGradeRequiredToSign() const;
 	int getGradeRequiredToExecute() const;
 	bool getIsSigned() const;
@@ -40,6 +42,7 @@ private:
 	AForm &operator=(AForm const &other);
 
 	std::string const name;
+	std::string const target;
 	int const gradeRequiredToSign;
 	int const gradeRequiredToExecute;
 	bool isSigned;

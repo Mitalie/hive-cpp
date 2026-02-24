@@ -22,9 +22,11 @@ AForm::~AForm()
 
 AForm::AForm(
 	std::string const &name,
+	std::string const &target,
 	int gradeRequiredToSign,
 	int gradeRequiredToExecute)
 	: name(name),
+	  target(target),
 	  gradeRequiredToSign(gradeRequiredToSign),
 	  gradeRequiredToExecute(gradeRequiredToExecute),
 	  isSigned(false)
@@ -49,6 +51,11 @@ AForm::AForm(AForm const &other)
 std::string const &AForm::getName() const
 {
 	return name;
+}
+
+std::string const &AForm::getTarget() const
+{
+	return target;
 }
 
 int AForm::getGradeRequiredToSign() const
@@ -76,6 +83,8 @@ void AForm::beSigned(Bureaucrat const &signer)
 std::ostream &operator<<(std::ostream &os, AForm const &f)
 {
 	os << f.getName()
+	   << " for "
+	   << f.getTarget()
 	   << ", a form requiring a bureaucrat of grade "
 	   << f.getGradeRequiredToSign()
 	   << " to sign and of grade "
