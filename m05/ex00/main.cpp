@@ -1,4 +1,5 @@
 #include <climits>
+#include <exception>
 #include <iostream>
 
 #include "Bureaucrat.hpp"
@@ -98,10 +99,23 @@ void testBureaucratIncDec()
 
 int main()
 {
-	std::cout << BYELLOW "==== Test 1: Bureaucrat construction ====" RSTN;
-	testBureaucratCons();
-	std::cout << BYELLOW "==== Test 2: Bureaucrat information ====" RSTN;
-	testBureaucratInfo();
-	std::cout << BYELLOW "==== Test 3: Bureaucrat increment and decrement ====" RSTN;
-	testBureaucratIncDec();
+	try
+	{
+		std::cout << BYELLOW "==== Test 1: Bureaucrat construction ====" RSTN;
+		testBureaucratCons();
+		std::cout << BYELLOW "==== Test 2: Bureaucrat information ====" RSTN;
+		testBureaucratInfo();
+		std::cout << BYELLOW "==== Test 3: Bureaucrat increment and decrement ====" RSTN;
+		testBureaucratIncDec();
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
+	}
 }

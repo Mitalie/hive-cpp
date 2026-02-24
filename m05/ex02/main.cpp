@@ -1,4 +1,5 @@
 #include <climits>
+#include <exception>
 #include <iostream>
 
 #include "AForm.hpp"
@@ -314,22 +315,35 @@ void testConcreteExec()
 
 int main()
 {
-	std::cout << BYELLOW "==== Test 1: Bureaucrat construction ====" RSTN;
-	testBureaucratCons();
-	std::cout << BYELLOW "==== Test 2: Bureaucrat information ====" RSTN;
-	testBureaucratInfo();
-	std::cout << BYELLOW "==== Test 3: Bureaucrat increment and decrement ====" RSTN;
-	testBureaucratIncDec();
-	std::cout << BYELLOW "==== Test 4: AForm construction ====" RSTN;
-	testFormCons();
-	std::cout << BYELLOW "==== Test 5: AForm information ====" RSTN;
-	testFormInfo();
-	std::cout << BYELLOW "==== Test 6: Signing forms ====" RSTN;
-	testSigning();
-	std::cout << BYELLOW "==== Test 7: Executing forms ====" RSTN;
-	testExecution();
-	std::cout << BYELLOW "==== Test 8: Concrete forms construction and information ====" RSTN;
-	testConcreteInfo();
-	std::cout << BYELLOW "==== Test 9: Concrete forms signing and execution ====" RSTN;
-	testConcreteExec();
+	try
+	{
+		std::cout << BYELLOW "==== Test 1: Bureaucrat construction ====" RSTN;
+		testBureaucratCons();
+		std::cout << BYELLOW "==== Test 2: Bureaucrat information ====" RSTN;
+		testBureaucratInfo();
+		std::cout << BYELLOW "==== Test 3: Bureaucrat increment and decrement ====" RSTN;
+		testBureaucratIncDec();
+		std::cout << BYELLOW "==== Test 4: AForm construction ====" RSTN;
+		testFormCons();
+		std::cout << BYELLOW "==== Test 5: AForm information ====" RSTN;
+		testFormInfo();
+		std::cout << BYELLOW "==== Test 6: Signing forms ====" RSTN;
+		testSigning();
+		std::cout << BYELLOW "==== Test 7: Executing forms ====" RSTN;
+		testExecution();
+		std::cout << BYELLOW "==== Test 8: Concrete forms construction and information ====" RSTN;
+		testConcreteInfo();
+		std::cout << BYELLOW "==== Test 9: Concrete forms signing and execution ====" RSTN;
+		testConcreteExec();
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
+	}
 }
