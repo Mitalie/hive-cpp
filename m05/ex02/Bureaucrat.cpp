@@ -4,7 +4,7 @@
 #include <string>
 #include <stdexcept>
 
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::GradeTooHighException::GradeTooHighException()
 	: std::logic_error("Grade too high for Bureaucrat")

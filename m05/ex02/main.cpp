@@ -1,8 +1,8 @@
 #include <climits>
 #include <iostream>
 
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
 
 #define RED "\x1b[31m"
 #define GREEN "\x1b[32m"
