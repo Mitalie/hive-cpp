@@ -29,6 +29,7 @@ public:
 	void promote();
 	void demote();
 	void signForm(AForm &f) const;
+	void executeForm(AForm const &f) const;
 
 private:
 	// default constructor forbidden, name and grade required

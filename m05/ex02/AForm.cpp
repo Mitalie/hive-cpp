@@ -16,6 +16,11 @@ AForm::GradeTooLowException::GradeTooLowException()
 {
 }
 
+AForm::NotSignedException::NotSignedException()
+	: std::logic_error("Form not signed before execution")
+{
+}
+
 AForm::~AForm()
 {
 }
@@ -78,6 +83,15 @@ void AForm::beSigned(Bureaucrat const &signer)
 	if (signer.getGrade() > gradeRequiredToSign)
 		throw GradeTooLowException();
 	isSigned = true;
+}
+
+void AForm::execute(Bureaucrat const &executor) const
+{
+	if (executor.getGrade() > gradeRequiredToExecute)
+		throw GradeTooLowException();
+	if (!isSigned)
+		throw NotSignedException();
+	action();
 }
 
 std::ostream &operator<<(std::ostream &os, AForm const &f)

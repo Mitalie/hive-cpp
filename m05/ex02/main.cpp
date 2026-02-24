@@ -105,6 +105,12 @@ public:
 		: AForm(name, "<no target>", gradeRequiredToSign, gradeRequiredToExecute)
 	{
 	}
+
+private:
+	void action() const
+	{
+		std::cout << "TestAForm action taken\n";
+	}
 };
 
 void testFormCons()
@@ -204,6 +210,29 @@ void testSigning()
 	PRINT_VALUE(f3);
 }
 
+void testExecution()
+{
+	Bureaucrat low("Low Grade", 150);
+	Bureaucrat high("High Grade", 1);
+	TestAForm u("TestForm", 100, 50);
+	TestAForm s("TestForm", 100, 50);
+	high.signForm(s);
+	std::cout << YELLOW "- bureaucrat fails to execute unsigned form" RSTN;
+	PRINT_CODE(high.executeForm(u);)
+	std::cout << YELLOW "- bureaucrat of insufficient level fails to execute form" RSTN;
+	PRINT_CODE(low.executeForm(s);)
+	std::cout << YELLOW "- bureaucrat of sufficient level successfully executes form" RSTN;
+	PRINT_CODE(high.executeForm(s);)
+	std::cout << YELLOW "- AForm::execute checks requirements" RSTN;
+	PRINT_CODE_THROWING(
+		AForm::NotSignedException,
+		u.execute(high);)
+	PRINT_CODE_THROWING(
+		AForm::GradeTooLowException,
+		s.execute(low);)
+	PRINT_CODE(s.execute(high);)
+}
+
 int main()
 {
 	std::cout << BYELLOW "==== Test 1: Bureaucrat construction ====" RSTN;
@@ -218,4 +247,6 @@ int main()
 	testFormInfo();
 	std::cout << BYELLOW "==== Test 6: Signing forms ====" RSTN;
 	testSigning();
+	std::cout << BYELLOW "==== Test 7: Executing forms ====" RSTN;
+	testExecution();
 }

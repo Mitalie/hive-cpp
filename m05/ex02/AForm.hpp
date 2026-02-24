@@ -27,6 +27,11 @@ public:
 	public:
 		GradeTooLowException();
 	};
+	class NotSignedException : public std::logic_error
+	{
+	public:
+		NotSignedException();
+	};
 
 	std::string const &getName() const;
 	std::string const &getTarget() const;
@@ -34,12 +39,15 @@ public:
 	int getGradeRequiredToExecute() const;
 	bool getIsSigned() const;
 	void beSigned(Bureaucrat const &signer);
+	void execute(Bureaucrat const &executor) const;
 
 private:
 	// default constructor forbidden, name and grade requirements required
 	AForm();
 	// assignment forbidden, name and grade requirements are const
 	AForm &operator=(AForm const &other);
+
+	virtual void action() const = 0;
 
 	std::string const name;
 	std::string const target;
