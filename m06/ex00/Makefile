@@ -6,7 +6,7 @@ SRCS := \
 
 CXX := c++
 CPPFLAGS := -MMD -MP
-CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -g
+CXXFLAGS := -Wall -Wextra -Werror -std=c++11 -g
 
 OBJDIR := obj
 OBJS := $(SRCS:%.cpp=$(OBJDIR)/%.o)
