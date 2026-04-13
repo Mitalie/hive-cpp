@@ -1,14 +1,42 @@
 #include "ScalarConverter.hpp"
 
+#include <cmath>
 #include <cstddef>
 #include <iostream>
+#include <limits>
 #include <stdexcept>
 #include <string>
+#include <sstream>
 
+// static_cast does not change the value for the same type, so a single function template can be used for all types
 template <typename T>
 void printValue(T value)
 {
-	// TODO
+	// Consider NaN and out-of-range values as impossible for char and int. Also avoid printing non-printable characters for char.
+	if (std::isnan(value) || value < 0 || value > std::numeric_limits<char>::max())
+		std::cout << "char: impossible\n";
+	else if (value < 32 || value > 126)
+		std::cout << "char: non-printable\n";
+	else
+		std::cout << "char: '" << static_cast<char>(value) << "'\n";
+
+	if (std::isnan(value) || value < std::numeric_limits<int>::min() || value > (double)std::numeric_limits<int>::max())
+		std::cout << "int: impossible\n";
+	else
+		std::cout << "int: " << static_cast<int>(value) << '\n';
+
+	// Float and double are never impossible, but ensure that we print a decimal point and a zero for whole numbers.
+	float fv = static_cast<float>(value);
+	std::string fstr = (std::ostringstream() << fv).str();
+	if (std::isfinite(fv) && fstr.find('.') == std::string::npos)
+		fstr += ".0";
+	std::cout << "float: " << fstr << "f\n";
+
+	double dv = static_cast<double>(value);
+	std::string dstr = (std::ostringstream() << dv).str();
+	if (std::isfinite(dv) && dstr.find('.') == std::string::npos)
+		dstr += ".0";
+	std::cout << "double: " << dstr << '\n';
 }
 
 bool handleCharLiteral(std::string const &input)
