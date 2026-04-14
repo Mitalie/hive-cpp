@@ -1,6 +1,7 @@
 #include "gen-ident.hpp"
 
 #include <iostream>
+#include <random>
 
 #include "Base.hpp"
 #include "A.hpp"
@@ -9,9 +10,9 @@
 
 Base *generate()
 {
-	static int next = 0;
-	next = (next + 1) % 3; // totally random sequence of 1, 2, 0, 1, 2, 0...
-	switch (next)
+	static std::mt19937 rng{std::random_device{}()};
+	static std::uniform_int_distribution<> dist{0, 2};
+	switch (dist(rng))
 	{
 	case 0:
 		std::cout << "Generating A\n";
