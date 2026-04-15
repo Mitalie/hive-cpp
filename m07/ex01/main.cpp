@@ -1,3 +1,4 @@
+#include <exception>
 #include <cstddef>
 #include <iostream>
 #include <string>
@@ -44,7 +45,7 @@ static void appendExclamation(std::string &s)
 	s += '!';
 }
 
-int main()
+void itertest_main()
 {
 	int iarr[5] = {3, 2, 1, 0, -1};
 	std::cout << "print array of ints as symbols (callback with int const &)\n";
@@ -71,4 +72,22 @@ int main()
 	iter(sarr, arrsize(sarr), appendExclamation);
 	std::cout << "\nprint array of strings (callback with std::string const &)\n";
 	iter(sarr, arrsize(sarr), printStrs);
+}
+
+int main()
+{
+	try
+	{
+		itertest_main();
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
+	}
 }

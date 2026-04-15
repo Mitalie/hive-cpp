@@ -20,7 +20,7 @@ static void printArray(Array<T> const &arr, const char *name, const char *wrap)
 	std::cout << "  > " #code "\n"; \
 	code;
 
-int main()
+void arraytest_main()
 {
 	std::cout << "Empty arrays can be created and destroyed and have size 0:" << '\n';
 	{
@@ -86,5 +86,23 @@ int main()
 	catch (std::exception const &e)
 	{
 		std::cout << "    Caught exception: " << e.what() << '\n';
+	}
+}
+
+int main()
+{
+	try
+	{
+		arraytest_main();
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
 	}
 }
