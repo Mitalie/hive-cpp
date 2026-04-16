@@ -1,6 +1,7 @@
 #include <climits>
 #include <exception>
 #include <iostream>
+#include <vector>
 
 #include "Span.hpp"
 
@@ -95,11 +96,23 @@ void spantest_large()
 	std::cout << "    Longest span: " << sp3.longestSpan() << '\n';
 }
 
+void spantest_iterator()
+{
+	std::cout << "Iterator insertion test (i=0..100, v=i*i):\n";
+	PRINT_CODE(std::vector<int> vec;)
+	PRINT_CODE(for (int i = 0; i < 101; ++i) vec.push_back(i * i);)
+	PRINT_CODE(Span sp(vec.size());)
+	PRINT_CODE(sp.addNumbers(vec.begin(), vec.end());)
+	std::cout << "  Shortest span: " << sp.shortestSpan() << '\n';
+	std::cout << "  Longest span: " << sp.longestSpan() << '\n';
+}
+
 int main()
 {
 	spantest_minimal();
 	spantest_preconditions();
 	spantest_extermeValues();
 	spantest_large();
+	spantest_iterator();
 	return 0;
 }

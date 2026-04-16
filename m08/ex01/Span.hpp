@@ -14,6 +14,9 @@ public:
 	unsigned int shortestSpan() const;
 	unsigned int longestSpan() const;
 
+	template <typename InputIt>
+	void addNumbers(InputIt first, InputIt last);
+
 private:
 	// Default constructor not allowed, capacity required
 	Span();
@@ -25,3 +28,13 @@ private:
 	mutable unsigned int sortedCount;
 	void ensureSorted() const;
 };
+
+template <typename InputIt>
+void Span::addNumbers(InputIt first, InputIt last)
+{
+	while (first != last)
+	{
+		addNumber(*first);
+		++first;
+	}
+}
