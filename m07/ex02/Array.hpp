@@ -10,7 +10,7 @@ public:
 	Array();
 	Array(unsigned int n);
 	Array(Array const &);
-	Array &operator=(Array const &);
+	Array &operator=(Array);
 
 	T &operator[](unsigned int i);
 	T const &operator[](unsigned int i) const;
@@ -50,13 +50,12 @@ Array<T>::Array(Array const &other)
 }
 
 template <typename T>
-Array<T> &Array<T>::operator=(Array const &other)
+Array<T> &Array<T>::operator=(Array copy)
 {
-	delete[] arr;
-	arr = new T[other.len];
-	len = other.len;
-	for (unsigned int i = 0; i < len; i++)
-		arr[i] = other.arr[i];
+	T *oldArr = arr;
+	arr = copy.arr;
+	len = copy.len;
+	copy.arr = oldArr;
 	return *this;
 }
 
