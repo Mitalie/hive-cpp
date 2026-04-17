@@ -37,7 +37,7 @@ Array<T>::Array()
 
 template <typename T>
 Array<T>::Array(unsigned int n)
-	: arr(new T[n]), len(n)
+	: arr(new T[n]()), len(n)
 {
 }
 
