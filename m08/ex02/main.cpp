@@ -77,9 +77,55 @@ void list_test()
 	std::stack<int, std::list<int> > s(mstack);
 }
 
+void extra_test()
+{
+	std::cout << "Extra tests:\n";
+	std::cout << "  - std::vector as the underlying container\n";
+	MutantStack<int, std::vector<int> > mstack;
+	PRINT_CODE(mstack.push(1);)
+	PRINT_CODE(mstack.push(2);)
+	PRINT_CODE(mstack.push(3);)
+	PRINT_CODE(mstack.push(4);)
+	std::cout << "  - top(): " << mstack.top() << '\n';
+	std::cout << "  - size(): " << mstack.size() << '\n';
+	PRINT_CODE(mstack.pop();)
+	std::cout << "  - top(): " << mstack.top() << '\n';
+	std::cout << "  - size(): " << mstack.size() << '\n';
+
+	const MutantStack<int, std::vector<int> > &cmstack = mstack;
+	MutantStack<int, std::vector<int> >::const_iterator it = cmstack.begin();
+	MutantStack<int, std::vector<int> >::const_iterator ite = cmstack.end();
+	std::cout << "  - list contents through const iterator:\n";
+	while (it != ite)
+	{
+		std::cout << "    " << *it << '\n';
+		++it;
+	}
+	std::cout << "  - modify contents through reverse iterator:\n";
+	MutantStack<int, std::vector<int> >::reverse_iterator rit = mstack.rbegin();
+	MutantStack<int, std::vector<int> >::reverse_iterator rite = mstack.rend();
+	while (rit != rite)
+	{
+		std::cout << "    " << *rit << " -> ";
+		*rit += 10;
+		std::cout << *rit << '\n';
+		++rit;
+	}
+	std::cout << "  - list contents through reverse const iterator:\n";
+	MutantStack<int, std::vector<int> >::const_reverse_iterator crit = cmstack.rbegin();
+	MutantStack<int, std::vector<int> >::const_reverse_iterator crite = cmstack.rend();
+	while (crit != crite)
+	{
+		std::cout << "    " << *crit << '\n';
+		++crit;
+	}
+}
+
 int main()
 {
 	mutantstack_test();
 	std::cout << '\n';
 	list_test();
+	std::cout << '\n';
+	extra_test();
 }
