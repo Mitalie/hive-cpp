@@ -107,12 +107,29 @@ void spantest_iterator()
 	std::cout << "  Longest span: " << sp.longestSpan() << '\n';
 }
 
-int main()
+void spantest_main()
 {
 	spantest_minimal();
 	spantest_preconditions();
 	spantest_extermeValues();
 	spantest_large();
 	spantest_iterator();
-	return 0;
+}
+
+int main()
+{
+	try
+	{
+		spantest_main();
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
+	}
 }

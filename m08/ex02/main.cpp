@@ -1,3 +1,4 @@
+#include <exception>
 #include <iostream>
 #include <list>
 #include <stack>
@@ -121,11 +122,29 @@ void extra_test()
 	}
 }
 
-int main()
+void stacktest_main()
 {
 	mutantstack_test();
 	std::cout << '\n';
 	list_test();
 	std::cout << '\n';
 	extra_test();
+}
+
+int main()
+{
+	try
+	{
+		stacktest_main();
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
+	}
 }

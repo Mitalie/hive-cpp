@@ -1,5 +1,6 @@
 #include <cstddef>
 #include <deque>
+#include <exception>
 #include <iostream>
 #include <list>
 #include <vector>
@@ -43,7 +44,7 @@ void testFind(const Coll &container, int value, const char *containerName)
 	testFind_impl<const Coll, typename Coll::const_iterator>(container, value, containerName);
 }
 
-int main()
+void testfind_main()
 {
 	const int nums[] = {1, 5, 8, 2, 6};
 	const size_t numCount = sizeof(nums) / sizeof(nums[0]);
@@ -66,4 +67,22 @@ int main()
 	testFind(lc, 8, "const std::list<int>");
 	testFind(dc, 3, "const std::deque<int>");
 	testFind(dc, 8, "const std::deque<int>");
+}
+
+int main()
+{
+	try
+	{
+		testfind_main();
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
+	}
 }
