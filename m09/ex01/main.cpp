@@ -16,12 +16,17 @@ int main(int argc, char *argv[])
 
 	try
 	{
+		if (*expression == ' ')
+			expression++; // Tolerate one leading space
 		while (*expression)
 		{
 			char symbol = *expression++;
 			if (symbol == ' ')
-				continue;
+				throw std::runtime_error("Multiple spaces");
 			rpn.inputSymbol(symbol);
+			// Consume one space after symbol, tolerate one trailing space
+			if (*expression && *expression++ != ' ')
+				throw std::runtime_error("Space expected between symbols");
 		}
 		std::cout << rpn.getResult() << '\n';
 	}
