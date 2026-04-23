@@ -1,3 +1,4 @@
+#include <exception>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -138,7 +139,7 @@ static void handleInputLine(const std::string &line, BitcoinExchange &exchange)
 	}
 }
 
-int main(int argc, char *argv[])
+int btc_main(int argc, char *argv[])
 {
 	if (argc != 2)
 	{
@@ -169,4 +170,22 @@ int main(int argc, char *argv[])
 	}
 	handleFile(inputFile, isInputHeader, handleInputLine, exchange);
 	return 0;
+}
+
+int main(int argc, char *argv[])
+{
+	try
+	{
+		return btc_main(argc, argv);
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
+	}
 }

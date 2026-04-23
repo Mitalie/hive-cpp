@@ -1,4 +1,5 @@
 #include <deque>
+#include <exception>
 #include <iostream>
 #include <limits>
 #include <sstream>
@@ -56,7 +57,7 @@ void printColl(const C &coll)
 	std::cout << '\n';
 }
 
-int main(int argc, char *argv[])
+int pmergeme_main(int argc, char *argv[])
 {
 	if (argc < 2)
 	{
@@ -95,4 +96,24 @@ int main(int argc, char *argv[])
 	double deqSeconds = deqTime.tv_sec + deqTime.tv_nsec / 1e9;
 	std::cout << "Time to process a range of " << vec.size() << " elements with std::vector : " << vecSeconds << " s\n";
 	std::cout << "Time to process a range of " << deq.size() << " elements with std::deque  : " << deqSeconds << " s\n";
+
+	return 0;
+}
+
+int main(int argc, char *argv[])
+{
+	try
+	{
+		return pmergeme_main(argc, argv);
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
+	}
 }

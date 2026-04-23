@@ -3,7 +3,7 @@
 
 #include "RPN.hpp"
 
-int main(int argc, char *argv[])
+int rpn_main(int argc, char *argv[])
 {
 	if (argc != 2)
 	{
@@ -37,4 +37,22 @@ int main(int argc, char *argv[])
 	}
 
 	return 0;
+}
+
+int main(int argc, char *argv[])
+{
+	try
+	{
+		return rpn_main(argc, argv);
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	catch (...)
+	{
+		std::cerr << "Unknown exception" << std::endl;
+		return 1;
+	}
 }
