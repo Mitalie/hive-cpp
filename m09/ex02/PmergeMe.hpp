@@ -155,7 +155,7 @@ void PmergeMe<T>::sort(Coll &coll)
 	// Create a separate collection for the output to avoid invalidating the indices stored in the
 	// pairs. We later swap the contents into the reference output.
 	Coll out;
-	out.reserve(coll.size());
+	// out.reserve(coll.size());
 	// The first lower item is already in the correct position, so copy it to output already.
 	out.push_back(coll[pairs[0].getLowerIdx()]);
 
