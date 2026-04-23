@@ -29,6 +29,26 @@ timespec operator-(const timespec &a, const timespec &b)
 }
 
 template <typename C>
+bool fillColl(C &coll, int argc, char *argv[])
+{
+	for (int i = 1; i < argc; ++i)
+	{
+		std::istringstream iss(argv[i]);
+		long long num;
+		iss >> num;
+		if (!iss.eof())
+			iss >> std::ws;
+		if (!iss || !iss.eof() || num < 0 || num > std::numeric_limits<unsigned int>::max())
+		{
+			std::cerr << "Invalid input: " << argv[i] << " is not a valid unsigned integer.\n";
+			return false;
+		}
+		coll.push_back(static_cast<unsigned int>(num));
+	}
+	return true;
+}
+
+template <typename C>
 void printColl(const C &coll)
 {
 	for (typename C::const_iterator it = coll.begin(); it != coll.end(); ++it)
@@ -44,41 +64,30 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	std::vector<unsigned int> vec;
-	std::deque<unsigned int> deq;
-	vec.reserve(argc - 1);
-	for (int i = 1; i < argc; ++i)
-	{
-		std::istringstream iss(argv[i]);
-		long long num;
-		iss >> num;
-		if (!iss.eof())
-			iss >> std::ws;
-		if (!iss || !iss.eof() || num < 0 || num > std::numeric_limits<unsigned int>::max())
-		{
-			std::cerr << "Invalid input: " << argv[i] << " is not a valid unsigned integer.\n";
-			return 1;
-		}
-		vec.push_back(static_cast<unsigned int>(num));
-		deq.push_back(static_cast<unsigned int>(num));
-	}
-
-	std::cout << "Before (vector): ";
-	printColl(vec);
-	std::cout << "Before (deque) : ";
-	printColl(deq);
+	// Validate input and retain unsorted sequence for "Before" output.
+	std::vector<unsigned int> tmpVec;
+	if (!fillColl(tmpVec, argc, argv))
+		return 1;
+	std::cout << "Before : ";
+	printColl(tmpVec);
 
 	timespec vecStart = gettime();
+	std::vector<unsigned int> vec;
+	fillColl(vec, argc, argv);
 	PmergeMe<unsigned int>::sort(vec);
 	timespec vecEnd = gettime();
+
 	timespec deqStart = gettime();
+	std::deque<unsigned int> deq;
+	fillColl(deq, argc, argv);
 	PmergeMe<unsigned int>::sort(deq);
 	timespec deqEnd = gettime();
 
-	std::cout << "After (vector) : ";
+	std::cout << "After  : ";
+	// std::cout << "After (vector): ";
 	printColl(vec);
-	std::cout << "After (deque)  : ";
-	printColl(deq);
+	// std::cout << "After (deque) : ";
+	// printColl(deq);
 
 	timespec vecTime = vecEnd - vecStart;
 	timespec deqTime = deqEnd - deqStart;
